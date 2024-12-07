@@ -1,137 +1,129 @@
 # Workflow for Updating and Deploying Code to Heroku
 
-## **1. Make Changes Locally**
+1. Make Changes Locally
+  - Open your project in your IDE or editor.
+  - Save your changes after editing the code.
 
-- Edit your code in your preferred IDE or editor.
-- Save your changes.
+2. Test Changes Locally
 
-## **2. Test Changes Locally**
+Backend:
+  1. Navigate to the backend folder:
 
-- **Backend:**
+cd api
 
-  ```bash
-  cd api
-  npm start
-  ```
+  2. Start the backend server:
 
-  - Verify the backend is running on http://localhost:8000.
-  - Use tools like Postman or curl to test API endpoints.
+npm start
 
-- **Frontend:**
+  3. Verify:
+	- The backend is running on http://localhost:8000.
+	- Use tools like Postman, curl, or a browser to test API endpoints.
 
-  ```bash
-  cd reactjs
-  npm start
-  ```
+Frontend:
+  1. Navigate to the frontend folder:
 
-  - Verify the frontend is running on http://localhost:3000.
-  - Test functionality in your browser.
+cd reactjs
 
-## **3. Commit Changes**
+  2. Start the frontend server:
 
-- Check what files have been modified:
+npm start
 
-  ```bash
-  git status
-  ```
+  3. Verify:
+	- The frontend is running on http://localhost:3000.
+	- Test functionality in your browser to ensure the frontend connects to the backend correctly.
 
-- Stage the changes:
+3. Commit Changes
 
-  ```bash
-  git add .
-  ```
+Check Modified Files:
 
-- Commit the changes with a descriptive message:
+git status
 
-  ```bash
-  git commit -m "Describe your changes here"
-  ```
+Stage Changes:
 
-## **4. Push Changes to GitHub**
+git add .
 
-- Push your changes to the main branch on GitHub:
+Commit Changes:
 
-  ```bash
-  git push origin main
-  ```
+Use a descriptive commit message:
 
-## **5. Deploy to Heroku**
+git commit -m "Describe the changes made, e.g., 'Updated AnimeCharacter component styling and logic'"
 
-- If using Heroku Git:
-  Push your changes to Heroku:
+4. Push Changes to GitHub
 
-  ```bash
-  git push heroku main
-  ```
+Push your committed changes to the main branch:
 
-- If using GitHub integration:
-  1. Go to your Heroku dashboard.
-  2. Select your app.
-  3. Under the Deploy tab, click Deploy Branch.
+git push origin main
 
-## **6. Verify Live Changes**
+5. Deploy to Heroku
 
-- Open the app in your browser:
+Using Heroku Git:
+  1. Push the changes to Heroku:
 
-  ```bash
-  heroku open --app bradleycruddemo
-  ```
+git push heroku main
 
-- Test your changes to ensure everything works.
+Using GitHub Integration:
+  1. Go to your Heroku Dashboard.
+  2. Select your app (e.g., bradleycruddemo).
+  3. Under the Deploy tab:
+	- Connect to GitHub (if not already connected).
+	- Select your repository.
+	- Deploy the latest branch.
 
-## **7. Debug Issues (If Any)**
+6. Verify Deployment
 
-- Check logs to debug:
+Open your Heroku app in a browser to ensure the deployment works as intended:
 
-  ```bash
-  heroku logs --tail --app bradleycruddemo
-  ```
+heroku open --app bradleycruddemo
 
-## **8. Additional Notes**
+Test all key functionalities, including frontend-backend integration.
 
-- Ensure your .env file is configured correctly for production.
-- Restart your Heroku app if needed:
+7. Debugging Issues
 
-  ```bash
-  heroku restart --app bradleycruddemo
-  ```
+If you encounter problems, check the Heroku logs for detailed error information:
+
+heroku logs --tail --app bradleycruddemo
+
+Look for relevant errors and resolve them locally.
+
+8. Optional: Restart Heroku App
+
+Restart the Heroku app if needed (e.g., environment variable changes):
+
+heroku restart --app bradleycruddemo
+
+9. Important Notes
+  - Environment Variables: Ensure your .env file is set up correctly for production, and the necessary variables are configured in Heroku under Settings > Config Vars.
+  - Database: Verify that any database changes are applied correctly.
+  - Testing: Run final tests on both the frontend and backend.
 
 Example Workflow Commands:
+  1. Start the backend locally:
 
-1. Test locally:
+cd api
+npm start
 
-  ```bash
-  npm start
-  ```
+  2. Start the frontend locally:
 
-2. Commit changes:
+cd reactjs
+npm start
 
-  ```bash
-  git add .
-  git commit -m "Updated Dashboard component"
-  ```
+  3. Commit changes:
 
-3. Push to GitHub:
+git add .
+git commit -m "Updated AnimeCharacter component logic"
 
-  ```bash
-  git push origin main
-  ```
+  4. Push to GitHub:
 
-4. Deploy to Heroku:
+git push origin main
 
-  ```bash
-  git push heroku main
-  ```
+  5. Deploy to Heroku:
 
-5. Verify live app:
+git push heroku main
 
-  ```bash
-  heroku open --app bradleycruddemo
-  ```
+  6. Open the live app:
 
-6. Debug logs:
+heroku open --app bradleycruddemo
 
-  ```bash
-  heroku logs --tail --app bradleycruddemo
-  ```
+  7. Debug logs:
 
+heroku logs --tail --app bradleycruddemo
