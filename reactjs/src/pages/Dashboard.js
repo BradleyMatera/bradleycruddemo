@@ -12,9 +12,9 @@ function Dashboard() {
     class: ''
   })
 
-  const API_BASE = process.env.NODE_ENV === 'development'
-    ? `http://localhost:8000/api/v1`
-    : process.env.REACT_APP_BASE_URL;
+const API_BASE = process.env.NODE_ENV === 'development'
+    ? `http://localhost:8000/api/v1` // Local development
+    : process.env.REACT_APP_API_BASE_URL; // Production
 
     let ignore = false;
     useEffect(() => {
