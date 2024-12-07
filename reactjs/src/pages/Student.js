@@ -1,89 +1,77 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from 'react-router-dom';
-
-// Import the enhanced student styles
-import '../styles/Student.css';
+import React, { useEffect, useState, useCallback } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import "../styles/Student.css";
 
 function Student() {
-  const [students, setStudents] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [values, setValues] = useState({
-    name: '',
-    class: ''
+    name: "",
+    class: "",
   });
 
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const API_BASE = process.env.NODE_ENV === 'development'
-    ? `http://localhost:8000/api/v1` 
-    : process.env.REACT_APP_API_BASE_URL;
+  const API_BASE =
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:8000/api/v1` // Local development
+      : process.env.REACT_APP_BASE_URL; // Production
 
-  useEffect(() => {
-    let ignore = false;
-
-    if (!ignore) {
-      getStudent();
-    }
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
-
-  const getStudent = async () => {
-    setLoading(true);
+  // Fetch a single student's details
+  const getStudent = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE}/students/${id}`);
       const data = await response.json();
       setValues({
         name: data.name,
-        class: data.class
+        class: data.class,
       });
     } catch (error) {
-      setError(error.message || "Unexpected Error");
-    } finally {
-      setLoading(false);
+      console.error("Error fetching student:", error);
     }
-  };
+  }, [API_BASE, id]);
 
+  // Fetch student details on component mount
+  useEffect(() => {
+    getStudent();
+  }, [getStudent]);
+
+  // Delete a student
   const deleteStudent = async () => {
-    setLoading(true);
     try {
-      await fetch(`${API_BASE}/students/${id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/students/${id}`, { method: "DELETE" });
       navigate("/dashboard", { replace: true });
     } catch (error) {
-      setError(error.message || "Unexpected Error");
-    } finally {
-      setLoading(false);
+      console.error("Error deleting student:", error);
     }
   };
 
+  // Update a student's details
   const updateStudent = async () => {
-    setLoading(true);
     try {
       await fetch(`${API_BASE}/students/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values)
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
       });
     } catch (error) {
-      setError(error.message || "Unexpected Error");
-    } finally {
-      setLoading(false);
+      console.error("Error updating student:", error);
     }
   };
 
+  // Handle form submission for updates
   const handleSubmit = (event) => {
     event.preventDefault();
     updateStudent();
   };
 
+  // Handle input field changes
   const handleInputChanges = (event) => {
+    event.persist();
     setValues((values) => ({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }));
   };
 
@@ -93,19 +81,30 @@ function Student() {
         <h1>Student Profile</h1>
         <h5>{values.name}</h5>
         <p>{values.class}</p>
-        <button onClick={deleteStudent} className="delete-button">Delete Student</button>
-        <Link to="/" className="nav-link">Home</Link>
-        <Link to="/dashboard" className="nav-link">Dashboard</Link>
-        <form onSubmit={handleSubmit} className="student-form">
+        <div className="student-buttons">
+          <button onClick={deleteStudent}>Delete Student</button>
+          <Link to="/dashboard">Dashboard</Link>
+        </div>
+        <form className="student-form" onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" name="name" value={values.name} onChange={handleInputChanges} />
+            <input
+              type="text"
+              name="name"
+              value={values.name}
+              onChange={handleInputChanges}
+            />
           </label>
           <label>
             Class:
-            <input type="text" name="class" value={values.class} onChange={handleInputChanges} />
+            <input
+              type="text"
+              name="class"
+              value={values.class}
+              onChange={handleInputChanges}
+            />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Update" />
         </form>
       </header>
     </div>
