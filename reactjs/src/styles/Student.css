@@ -1,0 +1,80 @@
+/* Student Page Container */
+.student-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(-45deg, #fbc2eb, #a6c1ee, #d4fc79, #96e6a1);
+    background-size: 300% 300%;
+    animation: gradient-flow 12s ease infinite;
+    min-height: 100vh;
+}
+
+/* Header Section */
+.student-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.student-header h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.student-header h5 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* Button Styles */
+.student-buttons button {
+    background-color: #ff385c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.student-buttons button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 8px 20px rgba(255, 56, 92, 0.5);
+}
+
+/* Form Section */
+.student-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+}
+
+.student-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.student-form input[type="submit"] {
+    background: #0073e6;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.student-form input[type="submit"]:hover {
+    background: #005bb5;
+    transform: scale(1.05);
+}
