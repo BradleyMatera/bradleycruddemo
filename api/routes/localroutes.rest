@@ -1,12 +1,15 @@
-GET http://localhost:8000/api/v1/students
+@baseURL = https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1
+@id = <COPY_ID_HERE>
+
+GET https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students
 
 ###
 
-GET http://localhost:8000/api/v1/students/62c32a4adf92621260ace820
+GET https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students/{id}
 
 ###
 
-POST http://localhost:8000/api/v1/students
+POST https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students
 Content-Type: application/json
 
 {
@@ -16,11 +19,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8000/api/v1/students/62c32a78debc5827e3215591
+DELETE https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students/{id}
 
 ###
 
-PATCH http://localhost:8000/api/v1/students/62c32abab9ba7d74af34c4e7
+PATCH https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students/{id}
 Content-Type: application/json
 
 {
