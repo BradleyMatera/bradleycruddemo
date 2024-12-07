@@ -80,7 +80,6 @@ const API_BASE = process.env.NODE_ENV === 'development'
       <header className="App-header">
         <h1>Students:</h1>
                 <h2>Brad</h2>
-
         <Link to="/">Home</Link>
         <ul>
           {
