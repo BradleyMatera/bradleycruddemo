@@ -1,11 +1,11 @@
-/* Student Page Container */
-.student-container {
+/* Anime Character Page Container */
+.anime-character-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: linear-gradient(-45deg, #fbc2eb, #a6c1ee, #d4fc79, #96e6a1);
+    background: linear-gradient(-45deg, #ffb3c6, #a9d8f4, #fff8cd, #e6a9ec);
     background-size: 300% 300%;
     animation: gradient-flow 12s ease infinite;
     min-height: 100vh;
@@ -29,43 +29,43 @@
 }
 
 /* Header Section */
-.student-header {
+.anime-character-header {
     text-align: center;
     margin-bottom: 20px;
     animation: fade-in 1.5s ease-out;
 }
 
-.student-header h1 {
+.anime-character-header h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: white;
+    color: #ffffff;
     text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.student-header h5 {
+.anime-character-header h5 {
     font-size: 1.8rem;
     font-weight: 500;
-    color: white;
+    color: #ffffff;
     text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.student-header p {
+.anime-character-header p {
     font-size: 1.2rem;
-    color: white;
+    color: #ffffff;
     margin: 10px 0;
 }
 
 /* Buttons Section */
-.student-buttons {
+.anime-character-buttons {
     display: flex;
     gap: 15px;
     margin: 20px 0;
     animation: slide-up 1.5s ease-out;
 }
 
-.student-buttons button,
-.student-buttons a {
-    background-color: #ff385c;
+.anime-character-buttons button,
+.anime-character-buttons a {
+    background-color: #0077ff;
     color: white;
     font-size: 1.2rem;
     font-weight: bold;
@@ -75,22 +75,22 @@
     text-decoration: none;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 8px 15px rgba(255, 56, 92, 0.4);
+    box-shadow: 0px 8px 15px rgba(0, 119, 255, 0.4);
 }
 
-.student-buttons button:hover,
-.student-buttons a:hover {
+.anime-character-buttons button:hover,
+.anime-character-buttons a:hover {
     transform: scale(1.1);
-    box-shadow: 0px 10px 25px rgba(255, 56, 92, 0.6);
+    box-shadow: 0px 10px 25px rgba(0, 119, 255, 0.6);
 }
 
-.student-buttons button:active {
+.anime-character-buttons button:active {
     transform: scale(0.95);
-    box-shadow: 0px 4px 10px rgba(255, 56, 92, 0.2);
+    box-shadow: 0px 4px 10px rgba(0, 119, 255, 0.2);
 }
 
 /* Form Section */
-.student-form {
+.anime-character-form {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
@@ -100,7 +100,7 @@
     animation: fade-in 1.5s ease-out;
 }
 
-.student-form label {
+.anime-character-form label {
     display: block;
     font-size: 1.1rem;
     font-weight: bold;
@@ -108,7 +108,7 @@
     margin-bottom: 8px;
 }
 
-.student-form input[type="text"] {
+.anime-character-form input[type="text"] {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
@@ -118,13 +118,13 @@
     transition: border-color 0.3s ease;
 }
 
-.student-form input[type="text"]:focus {
+.anime-character-form input[type="text"]:focus {
     outline: none;
-    border-color: #0073e6;
+    border-color: #ff385c;
 }
 
-.student-form input[type="submit"] {
-    background-color: #0073e6;
+.anime-character-form input[type="submit"] {
+    background-color: #ff385c;
     color: white;
     font-size: 1rem;
     font-weight: bold;
@@ -135,8 +135,8 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.student-form input[type="submit"]:hover {
-    background-color: #005bb5;
+.anime-character-form input[type="submit"]:hover {
+    background-color: #d32f2f;
     transform: scale(1.05);
 }
 

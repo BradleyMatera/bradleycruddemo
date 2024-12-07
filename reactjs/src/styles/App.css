@@ -64,7 +64,7 @@ html {
 
 /* Button Styling */
 .dashboard-button {
-  background-color: #ff385c;
+  background-color: #0077ff;
   color: white;
   font-size: 1.2rem;
   font-weight: bold;
@@ -74,18 +74,18 @@ html {
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 6px 15px rgba(255, 56, 92, 0.4);
+  box-shadow: 0px 6px 15px rgba(0, 119, 255, 0.4);
   margin-top: 20px;
 }
 
 .dashboard-button:hover {
   transform: scale(1.1);
-  box-shadow: 0px 10px 25px rgba(255, 56, 92, 0.6);
+  box-shadow: 0px 10px 25px rgba(0, 119, 255, 0.6);
 }
 
 .dashboard-button:active {
   transform: scale(0.95);
-  box-shadow: 0px 4px 10px rgba(255, 56, 92, 0.2);
+  box-shadow: 0px 4px 10px rgba(0, 119, 255, 0.2);
 }
 
 /* Fade-in Animation for Title */
