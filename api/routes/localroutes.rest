@@ -1,32 +1,39 @@
 @baseURL = https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1
 @id = <COPY_ID_HERE>
 
-GET https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students
+# Fetch all anime characters
+GET {{baseURL}}/animeCharacters
 
 ###
 
-GET https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students/{id}
+# Fetch a single anime character by ID
+GET {{baseURL}}/animeCharacters/{{id}}
 
 ###
 
-POST https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students
+# Create a new anime character
+POST {{baseURL}}/animeCharacters
 Content-Type: application/json
 
 {
-    "name": "Brandon Brown",
-    "class": "DWA"
+    "name": "Goku",
+    "anime": "Dragon Ball Z",
+    "powerLevel": 9001
 }
 
 ###
 
-DELETE https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students/{id}
+# Delete an anime character
+DELETE {{baseURL}}/animeCharacters/{{id}}
 
 ###
 
-PATCH https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/students/{id}
+# Update an anime character
+PATCH {{baseURL}}/animeCharacters/{{id}}
 Content-Type: application/json
 
 {
-    "name": "New Name",
-    "class": "New Class"
+    "name": "Vegeta",
+    "anime": "Dragon Ball Z",
+    "powerLevel": 9500
 }
