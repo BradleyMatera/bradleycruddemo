@@ -49,6 +49,7 @@ router.get('/:id', getStudent, (req, res) => {
 router.post('/', async (req, res) => {
   const { name, class: studentClass } = req.body;
 
+  // Validate required fields
   if (!name || !studentClass) {
     return res.status(400).json({ message: 'Name and class are required' });
   }
@@ -71,12 +72,12 @@ router.post('/', async (req, res) => {
 router.patch('/:id', getStudent, async (req, res) => {
   const { name, class: studentClass } = req.body;
 
+  // Update the student's fields if provided
   if (name != null) {
-    res.student.name = name; // Update the name if provided
+    res.student.name = name;
   }
-
   if (studentClass != null) {
-    res.student.class = studentClass; // Update the class if provided
+    res.student.class = studentClass;
   }
 
   try {
