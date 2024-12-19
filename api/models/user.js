@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
+// Validators
 const ValidateEmail = (email) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-};
-
-const ValidatePassword = (password) => {
-  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password);
 };
 
 const ValidateUserName = (user_name) => {
@@ -25,12 +22,11 @@ const userSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     required: true,
-    validate: [ValidateEmail, 'Please fill a valid email address'],
+    validate: [ValidateEmail, 'Please provide a valid email address'],
   },
   password: {
     type: String,
-    required: true,
-    validate: [ValidatePassword, 'Password must be between 6 and 20 characters long, and contain at least one numeric digit, one uppercase, and one lowercase letter'],
+    required: true, // No regex here
   },
   created_at: {
     type: Date,
@@ -39,21 +35,24 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// Middleware to hash the password before saving the user
+// Custom Pre-Save Middleware
 userSchema.pre('save', function (next) {
   const user = this;
 
-  // Only hash the password if it is new or has been modified
   if (user.isNew || user.isModified('password')) {
-    bcrypt.genSalt(10, (error, salt) => {
-      if (error) {
-        return next(error);
-      }
+    // Custom Password Validation
+    if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(user.password)) {
+      return next(
+        new Error('Password must be between 6 and 20 characters long, and contain at least one numeric digit, one uppercase, and one lowercase letter')
+      );
+    }
 
-      bcrypt.hash(user.password, salt, null, (error, hash) => {
-        if (error) {
-          return next(error);
-        }
+    // Hash Password
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) return next(err);
+
+      bcrypt.hash(user.password, salt, null, (err, hash) => {
+        if (err) return next(err);
 
         user.password = hash;
         next();
