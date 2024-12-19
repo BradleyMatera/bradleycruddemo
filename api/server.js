@@ -8,26 +8,26 @@ const app = express();
 
 app.use(cors());
 
-const PORT = process.env.PORT || 8000; // Port number or local envimronment
+const PORT = process.env.PORT || 8000;
 
-// Importing the animeCharacter router ROUTER IMPORTS
+// Importing the routers
 const authRouter = require('./routes/auth');
 const animeCharacterRouter = require('./routes/animeCharacters');
 
-// Ensure DATABASE_URL is defined ERROR HANDLING FOR MONGODB DATABASE
-const DATABASE_URL = process.env.DATABASE_URL; // MongoDB connection string
-if (!DATABASE_URL) { // Ensure DATABASE_URL is defined
-  console.error('Error: DATABASE_URL is not defined in .env file'); // Log an error message
-  process.exit(1);
+// Ensure DATABASE_URL is defined
+const DATABASE_URL = process.env.DATABASE_URL;
+if (!DATABASE_URL) {
+    console.error('Error: DATABASE_URL is not defined in .env file');
+    process.exit(1);
 }
 
 // MongoDB connection
-mongoose.connect(DATABASE_URL)
-  .then(() => console.log('Database Connection Established'))
-  .catch(error => {
-    console.error('Database Connection Error:', error);
-    process.exit(1);
-  });
+mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Database Connection Established'))
+    .catch(error => {
+        console.error('Database Connection Error:', error);
+        process.exit(1);
+    });
 
 // Middleware
 app.use(express.json());
@@ -36,15 +36,16 @@ app.use(express.json());
 app.use('/api/v1/animeCharacters', animeCharacterRouter);
 app.use('/api/v1/auth', authRouter);
 
-// Serve static files from the React build folder
-app.use(express.static(path.join(__dirname, '../reactjs/build')));
+// Serve React frontend
+const buildPath = path.join(__dirname, '../reactjs/build');
+app.use(express.static(buildPath));
 
-// Handle client-side routing for React
+// Handle React routes
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
+    res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

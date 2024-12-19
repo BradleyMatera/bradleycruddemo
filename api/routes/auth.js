@@ -4,7 +4,7 @@ const AuthenticationController = require('../controllers/authentication_controll
 
 // Define the POST route for signup
 // This was incorrectly nested inside the GET route before, which caused the error
-router.post('/signup', AuthenticationController.signup);
+router.post('/', AuthenticationController.signup);
 
 // Add a basic GET route for testing
 router.get('/', (req, res) => {
