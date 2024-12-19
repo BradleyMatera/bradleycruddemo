@@ -72,4 +72,13 @@ userSchema.pre('save', function (next) {
   }
 });
 
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
+  // Compare the provided password with the stored hashed password
+  bcrypt.compare(candidatePassword, this.password, (error, isMatch) => {
+    if (error) return callback(error); // Pass any errors to the callback
+    callback(null, isMatch); // Return the comparison result
+  });
+};
+
+
 module.exports = mongoose.model('User', userSchema); // Exports the User model for use in other parts of the application

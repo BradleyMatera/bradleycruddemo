@@ -1,4 +1,8 @@
 const express = require('express');
+const passport = require('passport');
+const passportService = require('../services/passport');
+const ProtectedRoute = passport.authenticate('local', { session: false }); // Local strategy for login authentication
+
 const router = express.Router();
 
 const AuthenticationController = require('../controllers/authentication_controller');
@@ -7,7 +11,7 @@ const AuthenticationController = require('../controllers/authentication_controll
 router.post('/signup', AuthenticationController.signup);
 
 // Route for login
-router.post('/login', AuthenticationController.login);
+router.post('/login', ProtectedRoute, AuthenticationController.login); // Corrected syntax for combining middleware and controller
 
 // Test route to verify API
 router.get('/', (req, res) => {
