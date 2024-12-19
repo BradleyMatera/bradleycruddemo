@@ -3,6 +3,11 @@ const express = require('express');
 const router = express.Router();
 const AnimeCharacter = require('../models/animeCharacter');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+const passportService = require('../services/passport');
+const ProtectedRoute = passport.authenticate('jwt', { session: false });
+
 
 // Middleware to validate and retrieve an animeCharacter by ID
 const getAnimeCharacter = async (req, res, next) => {
@@ -31,7 +36,7 @@ const getAnimeCharacter = async (req, res, next) => {
 };
 
 // Fetch all anime characters
-router.get('/', async (req, res) => {
+router.get('/', ProtectedRoute, async (req, res) => {
     try {
         // Retrieve all animeCharacters from the database
         const animeCharacters = await AnimeCharacter.find();
