@@ -1,6 +1,6 @@
 // server.js
 const express = require('express');
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
@@ -28,10 +28,9 @@ if (!process.env.DATABASE_URL) {
 }
 
 // MongoDB Connection
-mongoose.connect(process.env.DATABASE_URL)
+mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('[SUCCESS] Database Connection Established');
-        console.log('[DEBUG] Connected to:', process.env.DATABASE_URL);
     })
     .catch(error => {
         console.error('[ERROR] Database Connection Error:', error.message);
@@ -45,18 +44,6 @@ const animeCharacterRouter = require('./routes/animeCharacters');
 // API Routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/animeCharacters', animeCharacterRouter);
-
-// Serve React Static Files
-app.use(express.static(path.join(__dirname, '../reactjs/build')));
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
-});
-
-// Debugging: Test Route
-app.get('/test', (req, res) => {
-    console.log('[DEBUG] /test route hit');
-    res.status(200).json({ message: 'Test endpoint is working' });
-});
 
 // Error Handler for Unhandled Routes
 app.use((req, res, next) => {
