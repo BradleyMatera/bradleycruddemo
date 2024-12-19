@@ -17,9 +17,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "i": "^0.3.7",
     "jwt-simple": "0.5.6",
     "mongoose": "^8.8.4",
     "nodemon": "^3.1.7",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "path": "^0.12.7"
   }
 }
