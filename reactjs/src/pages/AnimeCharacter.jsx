@@ -14,71 +14,58 @@ function AnimeCharacter() {
 
   const API_BASE =
     process.env.NODE_ENV === "development"
-      ? `http://localhost:8000/api/v1` // Local development
-      : process.env.REACT_APP_API_BASE_URL || `https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1`; // Fallback to Heroku in production
+      ? `http://localhost:8000/api/v1`
+      : process.env.REACT_APP_API_BASE_URL || `https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1`;
 
-  // Fetch a single anime character's details
+  // Fetch anime character details
   const getAnimeCharacter = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE}/animeCharacters/${id}`);
       if (!response.ok) throw new Error("Failed to fetch anime character");
       const data = await response.json();
-      setValues({
-        name: data.name,
-        anime: data.anime,
-        powerLevel: data.powerLevel,
-      });
+      setValues(data);
     } catch (error) {
       console.error("Error fetching anime character:", error.message);
     }
   }, [API_BASE, id]);
 
-  // Fetch anime character details on component mount
   useEffect(() => {
     getAnimeCharacter();
   }, [getAnimeCharacter]);
 
-  // Delete an anime character
+  // Delete anime character
   const deleteAnimeCharacter = async () => {
     try {
-      const response = await fetch(`${API_BASE}/animeCharacters/${id}`, { method: "DELETE" });
-      if (!response.ok) throw new Error("Failed to delete anime character");
+      await fetch(`${API_BASE}/animeCharacters/${id}`, { method: "DELETE" });
       navigate("/dashboard", { replace: true });
     } catch (error) {
       console.error("Error deleting anime character:", error.message);
     }
   };
 
-  // Update an anime character's details
+  // Update anime character
   const updateAnimeCharacter = async () => {
     try {
-      const response = await fetch(`${API_BASE}/animeCharacters/${id}`, {
+      await fetch(`${API_BASE}/animeCharacters/${id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      if (!response.ok) throw new Error("Failed to update anime character");
-      alert("Anime character updated successfully!");
+      alert("Character updated successfully!");
     } catch (error) {
       console.error("Error updating anime character:", error.message);
     }
   };
 
-  // Handle form submission for updates
+  // Form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     updateAnimeCharacter();
   };
 
-  // Handle input field changes
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -89,43 +76,43 @@ function AnimeCharacter() {
         <p>{values.anime}</p>
         <p>Power Level: {values.powerLevel}</p>
         <div className="anime-character-buttons">
-          <button onClick={deleteAnimeCharacter}>Delete Character</button>
+          <button onClick={deleteAnimeCharacter}>Delete</button>
           <Link to="/dashboard">Dashboard</Link>
         </div>
-        <form className="anime-character-form" onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={values.name}
-              onChange={handleInputChanges}
-              required
-            />
-          </label>
-          <label>
-            Anime:
-            <input
-              type="text"
-              name="anime"
-              value={values.anime}
-              onChange={handleInputChanges}
-              required
-            />
-          </label>
-          <label>
-            Power Level:
-            <input
-              type="number"
-              name="powerLevel"
-              value={values.powerLevel}
-              onChange={handleInputChanges}
-              required
-            />
-          </label>
-          <button type="submit">Update</button>
-        </form>
       </header>
+      <form className="anime-character-form" onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={values.name}
+            onChange={handleInputChanges}
+            required
+          />
+        </label>
+        <label>
+          Anime:
+          <input
+            type="text"
+            name="anime"
+            value={values.anime}
+            onChange={handleInputChanges}
+            required
+          />
+        </label>
+        <label>
+          Power Level:
+          <input
+            type="number"
+            name="powerLevel"
+            value={values.powerLevel}
+            onChange={handleInputChanges}
+            required
+          />
+        </label>
+        <button type="submit">Update</button>
+      </form>
     </div>
   );
 }

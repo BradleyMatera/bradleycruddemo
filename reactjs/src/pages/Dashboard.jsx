@@ -1,14 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-//import "../styles/dashboard.css";
+import "../styles/dashboard.css";
 
 function Dashboard() {
   const [animeCharacters, setAnimeCharacters] = useState([]);
-  const [values, setValues] = useState({
-    name: "",
-    anime: "",
-    powerLevel: 0,
-  });
+  const [values, setValues] = useState({ name: "", anime: "", powerLevel: 0 });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -17,66 +13,57 @@ function Dashboard() {
       ? `http://localhost:8000/api/v1`
       : process.env.REACT_APP_API_BASE_URL || `https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1`;
 
-  // Fetch the list of anime characters
-const getAnimeCharacters = useCallback(async () => {
-  setLoading(true);
-  setError(null);
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${API_BASE}/animeCharacters`, {
-      headers: { Authorization: token },
-    });
-    if (!response.ok) throw new Error("Failed to fetch anime characters");
-    const data = await response.json();
-    setAnimeCharacters(data);
-  } catch (error) {
-    setError(error.message);
-  } finally {
-    setLoading(false);
-  }
-}, [API_BASE]);
+  // Fetch characters
+  const getAnimeCharacters = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${API_BASE}/animeCharacters`, {
+        headers: { Authorization: token },
+      });
+      if (!response.ok) throw new Error("Failed to fetch anime characters");
+      const data = await response.json();
+      setAnimeCharacters(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [API_BASE]);
 
-  // Fetch characters on component mount
   useEffect(() => {
     getAnimeCharacters();
   }, [getAnimeCharacters]);
 
-  // Create a new anime character
+  // Create character
   const createAnimeCharacter = async () => {
-    setLoading(true); // Set loading state to true when creation starts
-    setError(null); // Clear any previous errors
+    setLoading(true);
+    setError(null);
     try {
       const response = await fetch(`${API_BASE}/animeCharacters`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
       if (!response.ok) throw new Error("Failed to create anime character");
-      await getAnimeCharacters(); // Refresh the list
-      setValues({ name: "", anime: "", powerLevel: 0 }); // Reset the form
+      await getAnimeCharacters();
+      setValues({ name: "", anime: "", powerLevel: 0 });
     } catch (error) {
-      console.error("Error creating anime character:", error.message);
-      setError(error.message); // Set the error state
+      setError(error.message);
     } finally {
-      setLoading(false); // Set loading state to false when creation ends
+      setLoading(false);
     }
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     createAnimeCharacter();
   };
 
-  // Handle input changes
-  const handleInputChanges = (event) => {
-    const { name, value } = event.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleInputChanges = (e) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -84,13 +71,8 @@ const getAnimeCharacters = useCallback(async () => {
       <header className="dashboard-header">
         <h1>Anime Characters</h1>
         <Link className="dashboard-link" to="/">Home</Link>
-
-        {/* Show loading spinner */}
         {loading && <p>Loading...</p>}
-
-        {/* Show error message */}
         {error && <p className="error-message">{error}</p>}
-
         <ul className="character-list">
           {animeCharacters.map((character) => (
             <li key={character._id}>
@@ -98,8 +80,7 @@ const getAnimeCharacters = useCallback(async () => {
             </li>
           ))}
         </ul>
-
-        <form onSubmit={handleSubmit}>
+        <form className="dashboard-form" onSubmit={handleSubmit}>
           <label>
             Name:
             <input

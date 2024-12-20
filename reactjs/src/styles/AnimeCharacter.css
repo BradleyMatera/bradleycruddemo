@@ -1,70 +1,103 @@
+/* src/styles/AnimeCharacter.css */
+
+/* Container */
 .anime-character-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 40px;
     min-height: 100vh;
+    background-color: #f5f5f5;
     font-family: 'Poppins', sans-serif;
-    color: #333;
 }
 
+/* Header */
 .anime-character-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .anime-character-header h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
+.anime-character-header h5,
+.anime-character-header p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #555;
+}
+
+/* Buttons */
 .anime-character-buttons {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     margin: 20px 0;
 }
 
 .anime-character-buttons button,
 .anime-character-buttons a {
-    background-color: #0077ff;
-    color: white;
+    background-color: #1976d2;
+    color: #fff;
     font-size: 1rem;
-    padding: 10px 15px;
+    font-weight: 500;
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.anime-character-buttons button:hover,
+.anime-character-buttons a:hover {
+    background-color: #115293;
+}
+
+/* Form */
 .anime-character-form {
-    background: #f9f9f9;
-    border-radius: 5px;
-    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 .anime-character-form label {
     display: block;
     font-size: 1rem;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .anime-character-form input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.anime-character-form input:focus {
+    border-color: #1976d2;
 }
 
 .anime-character-form button {
-    background-color: #0077ff;
-    color: white;
-    padding: 10px 20px;
+    background-color: #1976d2;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.anime-character-form button:hover {
+    background-color: #115293;
 }

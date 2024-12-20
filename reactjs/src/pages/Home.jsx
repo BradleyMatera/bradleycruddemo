@@ -15,21 +15,21 @@ function Home() {
   };
 
   return (
-    <div className="App animated-background">
-      <header className="App-header">
+    <div className="home-container">
+      <header className="home-header">
         <h1 className="welcome-title">Welcome to the Anime Characters Database</h1>
-        <div className="link-container">
-          <Link to="/dashboard" className="dashboard-button">
+        <div className="button-group">
+          <Link to="/dashboard" className="primary-button">
             Go to Dashboard
           </Link>
           {isLoggedIn ? (
-            <button onClick={handleLogout} className="auth-button">
+            <button onClick={handleLogout} className="secondary-button">
               Logout
             </button>
           ) : (
             <>
-              <Link to="/login" className="auth-button">Login</Link>
-              <Link to="/signup" className="auth-button">Signup</Link>
+              <Link to="/login" className="secondary-button">Login</Link>
+              <Link to="/signup" className="secondary-button">Signup</Link>
             </>
           )}
         </div>
