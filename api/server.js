@@ -41,20 +41,22 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true
 const authRouter = require('./routes/auth');
 const animeCharacterRouter = require('./routes/animeCharacters');
 
-// Define Routes
+// API Routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/animeCharacters', animeCharacterRouter);
 
-// Default Route for Root Path
-app.get('/', (req, res) => {
-    res.status(200).json({ message: "Welcome to the Anime Characters API!" });
-});
-
-// Serve React Frontend (if applicable)
+// Serve React Frontend
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../reactjs/build')));
+    const frontendPath = path.join(__dirname, '../reactjs/build');
+    app.use(express.static(frontendPath));
+
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
+        res.sendFile(path.join(frontendPath, 'index.html'));
+    });
+} else {
+    // Default Route for Root Path (for development)
+    app.get('/', (req, res) => {
+        res.status(200).json({ message: "Welcome to the Anime Characters API!" });
     });
 }
 
