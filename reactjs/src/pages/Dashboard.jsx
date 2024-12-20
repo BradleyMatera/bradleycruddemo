@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import "../styles/dashboard.css";
+//import "../styles/dashboard.css";
 
 function Dashboard() {
   const [animeCharacters, setAnimeCharacters] = useState([]);
@@ -9,6 +9,8 @@ function Dashboard() {
     anime: "",
     powerLevel: 0,
   });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const API_BASE =
     process.env.NODE_ENV === "development"
@@ -16,16 +18,23 @@ function Dashboard() {
       : process.env.REACT_APP_API_BASE_URL || `https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1`;
 
   // Fetch the list of anime characters
-  const getAnimeCharacters = useCallback(async () => {
-    try {
-      const response = await fetch(`${API_BASE}/animeCharacters`);
-      if (!response.ok) throw new Error("Failed to fetch anime characters");
-      const data = await response.json();
-      setAnimeCharacters(data);
-    } catch (error) {
-      console.error("Error fetching anime characters:", error.message);
-    }
-  }, [API_BASE]);
+const getAnimeCharacters = useCallback(async () => {
+  setLoading(true);
+  setError(null);
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${API_BASE}/animeCharacters`, {
+      headers: { Authorization: token },
+    });
+    if (!response.ok) throw new Error("Failed to fetch anime characters");
+    const data = await response.json();
+    setAnimeCharacters(data);
+  } catch (error) {
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
+}, [API_BASE]);
 
   // Fetch characters on component mount
   useEffect(() => {
@@ -34,6 +43,8 @@ function Dashboard() {
 
   // Create a new anime character
   const createAnimeCharacter = async () => {
+    setLoading(true); // Set loading state to true when creation starts
+    setError(null); // Clear any previous errors
     try {
       const response = await fetch(`${API_BASE}/animeCharacters`, {
         method: "POST",
@@ -47,6 +58,9 @@ function Dashboard() {
       setValues({ name: "", anime: "", powerLevel: 0 }); // Reset the form
     } catch (error) {
       console.error("Error creating anime character:", error.message);
+      setError(error.message); // Set the error state
+    } finally {
+      setLoading(false); // Set loading state to false when creation ends
     }
   };
 
@@ -70,6 +84,13 @@ function Dashboard() {
       <header className="dashboard-header">
         <h1>Anime Characters</h1>
         <Link className="dashboard-link" to="/">Home</Link>
+
+        {/* Show loading spinner */}
+        {loading && <p>Loading...</p>}
+
+        {/* Show error message */}
+        {error && <p className="error-message">{error}</p>}
+
         <ul className="character-list">
           {animeCharacters.map((character) => (
             <li key={character._id}>
@@ -77,6 +98,7 @@ function Dashboard() {
             </li>
           ))}
         </ul>
+
         <form onSubmit={handleSubmit}>
           <label>
             Name:
@@ -108,7 +130,9 @@ function Dashboard() {
               required
             />
           </label>
-          <button type="submit">Add Character</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Adding..." : "Add Character"}
+          </button>
         </form>
       </header>
     </div>

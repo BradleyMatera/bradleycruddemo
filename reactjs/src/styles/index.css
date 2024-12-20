@@ -1,28 +1,10 @@
-/* Reset and Base Styles */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffb3c6, #a9d8f4, #fff8cd);
-  background-size: 400% 400%;
-  animation: gradient-shift 10s ease infinite;
+  background: #f0f0f0;
   color: #333;
 }
 
 code {
   font-family: 'Courier New', Courier, monospace;
-}
-
-/* Keyframe Animation */
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
 }

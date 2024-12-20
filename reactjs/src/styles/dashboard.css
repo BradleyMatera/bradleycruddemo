@@ -1,170 +1,57 @@
-/* Dashboard Container */
 .dashboard-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px;
-    background: linear-gradient(135deg, #ffb3c6, #a9d8f4, #fff8cd, #e6a9ec);
-    background-size: 300% 300%;
-    animation: gradient-shift 12s ease infinite;
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     color: #333;
 }
 
-/* Dashboard Header */
 .dashboard-header {
     text-align: center;
-    margin-bottom: 30px;
-    animation: fade-in 1.5s ease-out;
+    margin-bottom: 20px;
 }
 
 .dashboard-header h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     color: white;
-    text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Dashboard Link */
 .dashboard-link {
     background: #0077ff;
     color: white;
-    padding: 12px 25px;
-    border-radius: 30px;
+    padding: 10px 15px;
+    border-radius: 5px;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 8px 20px rgba(0, 119, 255, 0.4);
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-.dashboard-link:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 10px 25px rgba(0, 119, 255, 0.6);
-}
-
-/* Character List */
 .character-list {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
     padding: 20px;
-    width: 90%;
+    width: 100%;
     max-width: 600px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    animation: slide-up 1.5s ease-out;
-}
-
-.character-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
 }
 
 .character-list li {
-    font-size: 1.2rem;
-    padding: 15px 10px;
-    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-    color: #555;
+    font-size: 1rem;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .character-list li:last-child {
     border-bottom: none;
 }
 
-.character-list li:hover {
-    background-color: rgba(255, 235, 235, 0.6);
-    color: #333;
-}
-
 .character-list li a {
     text-decoration: none;
     color: #0077ff;
     font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.character-list li a:hover {
-    color: #005bb5;
-}
-
-/* Form Section */
-form {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 600px;
-    margin-top: 30px;
-    animation: fade-in 1.5s ease-out;
-}
-
-form label {
-    display: block;
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 8px;
-}
-
-form input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: border-color 0.3s ease;
-}
-
-form input[type="text"]:focus {
-    outline: none;
-    border-color: #0077ff;
-}
-
-form input[type="submit"] {
-    background-color: #0077ff;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-form input[type="submit"]:hover {
-    background-color: #005bb5;
-    transform: scale(1.05);
-}
-
-/* Animation Keyframes */
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-up {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }

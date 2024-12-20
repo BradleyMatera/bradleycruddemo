@@ -1,39 +1,13 @@
-/* General Reset and Body Styling */
 body,
 html {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background:
-    url('./assets/homebg.jpg');
-  background-size: cover, 400% 400%;
-  /* Ensure the image covers the page */
-  background-repeat: no-repeat;
-  background-position: center center;
-  animation: gradient-fade 12s ease infinite;
   color: #333;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Keyframes for a soft fading effect */
-@keyframes gradient-fade {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-    opacity: 0.9;
-  }
-
-  100% {
-    background-position: 0% 50%;
-    opacity: 1;
-  }
-}
-
-/* Main App Styles */
 .App {
   text-align: center;
 }
@@ -45,79 +19,26 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Welcome Title Styling */
 .welcome-title {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
-  margin-bottom: 20px;
-  animation: fade-in 1.5s ease-out;
+  color: white;
 }
 
-/* Animated Gradient Background */
-.animated-background {
-  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-  background-size: 300% 300%;
-  animation: gradient-shift 10s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Button Styling */
 .dashboard-button {
   background-color: #0077ff;
   color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 15px 30px;
+  font-size: 1rem;
+  padding: 10px 15px;
   border: none;
-  border-radius: 30px;
+  border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 6px 15px rgba(0, 119, 255, 0.4);
-  margin-top: 20px;
 }
 
 .dashboard-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 10px 25px rgba(0, 119, 255, 0.6);
-}
-
-.dashboard-button:active {
-  transform: scale(0.95);
-  box-shadow: 0px 4px 10px rgba(0, 119, 255, 0.2);
-}
-
-/* Fade-in Animation for Title */
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background-color: #005bb5;
 }
