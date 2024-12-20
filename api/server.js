@@ -2,8 +2,8 @@
 const express = require('express');
 require('dotenv').config(); // Load environment variables
 const mongoose = require('mongoose');
-const path = require('path');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 // Ensure DATABASE_URL is defined
-if (!process.env.DATABASE_URL) {
+if (!DATABASE_URL) {
     console.error('[ERROR] DATABASE_URL is not defined in .env file');
     process.exit(1);
 }
@@ -41,9 +41,22 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true
 const authRouter = require('./routes/auth');
 const animeCharacterRouter = require('./routes/animeCharacters');
 
-// API Routes
+// Define Routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/animeCharacters', animeCharacterRouter);
+
+// Default Route for Root Path
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "Welcome to the Anime Characters API!" });
+});
+
+// Serve React Frontend (if applicable)
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../reactjs/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../reactjs/build', 'index.html'));
+    });
+}
 
 // Error Handler for Unhandled Routes
 app.use((req, res, next) => {
@@ -53,4 +66,6 @@ app.use((req, res, next) => {
 });
 
 // Start Server
-app.listen(PORT, () => console.log(`[SUCCESS] Server running on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`[SUCCESS] Server running on port ${PORT}`);
+});
